@@ -17,7 +17,7 @@ jobs:
         with:
           channel: stable
 
-      - name: Install CocoaPods dependencies 
+      - name: Install CocoaPods dependencies
         run: |
           cd ios
           pod init
@@ -26,11 +26,15 @@ jobs:
       - name: Build iOS application
         #run: flutter build ios --release --no-codesign
         #run: flutter build ios --debug --no-codesign
-        run: flutter build ipa --no-codesign
+        #run: flutter build ipa --release --no-codesign
+        run:  flutter build ipa --release --no-codesign --obfuscate --split-debug-info=ios/symbols --build-name=0.2.0 --build-number=2
+        
+        # xcodebuild -exportArchive -archivePath $PWD/build/Runner.xcarchive -exportOptionsPlist exportOptions.plist -exportPath $PWD/build/Runner.ipa
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
           name: iOS-Build
           #path: build/ios/iphoneos # for command: flutter build ios --release --no-codesign
+          #path: build/ios/iphoneos # for command: flutter build ios --debug --no-codesign
           path: build/ios/archive # for command: flutter build ipa --no-codesign
