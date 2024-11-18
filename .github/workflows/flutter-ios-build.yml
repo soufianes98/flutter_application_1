@@ -27,8 +27,9 @@ jobs:
         #run: flutter build ios --release --no-codesign
         #run: flutter build ios --debug --no-codesign
         #run: flutter build ipa --release --no-codesign
-        run:  flutter build ipa --release --no-codesign --obfuscate --split-debug-info=ios/symbols --build-name=0.2.0 --build-number=2
-        
+        run: flutter build ipa --release --no-codesign --obfuscate --split-debug-info=ios/symbols --build-name=0.2.0 --build-number=2
+        run: xcodebuild -exportArchive -archivePath build/ios/archive/Runner.xcarchive -exportOptionsPlist exportOptions.plist -exportPath build/ios/ipa/Runner.ipa
+ 
         # xcodebuild -exportArchive -archivePath $PWD/build/Runner.xcarchive -exportOptionsPlist exportOptions.plist -exportPath $PWD/build/Runner.ipa
 
       - name: Upload artifact
@@ -37,4 +38,5 @@ jobs:
           name: iOS-Build
           #path: build/ios/iphoneos # for command: flutter build ios --release --no-codesign
           #path: build/ios/iphoneos # for command: flutter build ios --debug --no-codesign
-          path: build/ios/archive # for command: flutter build ipa --no-codesign
+          #path: build/ios/archive # for command: flutter build ipa --no-codesign
+          path: build/ios/ipa
