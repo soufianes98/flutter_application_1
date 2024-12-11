@@ -40,5 +40,5 @@ jobs:
           name: iOS-Build
           #path: build/ios/iphoneos # for command: flutter build ios --release --no-codesign
           #path: build/ios/iphoneos # for command: flutter build ios --debug --no-codesign
-          #path: build/ios/archive # for command: flutter build ipa --no-codesign
-          path: build/ios/ipa
+          path: build/ios/archive # for command: flutter build ipa --no-codesign
+          #path: build/ios/ipa
