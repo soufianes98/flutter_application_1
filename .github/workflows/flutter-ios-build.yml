@@ -44,3 +44,27 @@ jobs:
           #path: build/ios/iphoneos # for command: flutter build ios --debug --no-codesign
           #path: build/ios/archive # for command: flutter build ipa --no-codesign
           #path: build/ios/ipa
+
+
+      # More: https://chatgpt.com/share/67603bca-97a0-800f-bf71-14f90fd55afb
+      - name: Run Flutter Integration Test with Video Recording
+        run: |
+          # Boot iOS simulator
+          xcrun simctl list devices
+          xcrun simctl boot "iPhone 14"
+          # Start screen recording
+          mkdir -p artifacts
+          xcrun simctl io booted recordVideo artifacts/integration-test-video.mp4 & RECORD_PID=$!
+          # Run the integration tests
+          flutter drive \
+            --driver=test_driver/perf_driver.dart
+            --target=integration_test/app_test.dart
+          # Stop screen recording
+          kill $RECORD_PID || true
+
+
+      - name: Upload Test Video
+        uses: actions/upload-artifact@v4
+        with:
+          name: flutter-integration-test-video
+          path: artifacts/integration-test-video.mp4
