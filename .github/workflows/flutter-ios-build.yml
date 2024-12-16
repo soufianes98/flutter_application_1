@@ -39,7 +39,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: iOS-Build
-          path: build/ios/iphoneos # flutter build ios --simulator --no-codesign
+          path: build/ios/iphonesimulator # flutter build ios --simulator --no-codesign
           #path: build/ios/iphoneos # for command: flutter build ios --release --no-codesign
           #path: build/ios/iphoneos # for command: flutter build ios --debug --no-codesign
           #path: build/ios/archive # for command: flutter build ipa --no-codesign
