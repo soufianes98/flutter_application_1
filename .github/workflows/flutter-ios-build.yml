@@ -24,10 +24,11 @@ jobs:
           pod install
 
       - name: Build iOS application
+        run: flutter build ios --simulator --no-codesign
         #run: flutter build ios --release --no-codesign
         #run: flutter build ios --debug --no-codesign
         #run: flutter build ipa --release --no-codesign
-        run: flutter build ipa --release --no-codesign --obfuscate --split-debug-info=ios/symbols --build-name=0.2.0 --build-number=2
+        #run: flutter build ipa --release --no-codesign --obfuscate --split-debug-info=ios/symbols --build-name=0.2.0 --build-number=2
         
       #- name: Build iOS ipa
         #run: xcodebuild -exportArchive -archivePath build/ios/archive/Runner.xcarchive -exportOptionsPlist ios/exportOptions.plist -exportPath build/ios/ipa/Runner.ipa
@@ -38,7 +39,8 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: iOS-Build
+          path: build/ios/archive # flutter build ios --simulator --no-codesign
           #path: build/ios/iphoneos # for command: flutter build ios --release --no-codesign
           #path: build/ios/iphoneos # for command: flutter build ios --debug --no-codesign
-          path: build/ios/archive # for command: flutter build ipa --no-codesign
+          #path: build/ios/archive # for command: flutter build ipa --no-codesign
           #path: build/ios/ipa
